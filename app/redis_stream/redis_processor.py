@@ -1,10 +1,7 @@
 import logging
 import time
 
-import h3
 import redis
-
-from app.redis_client import redis_client
 
 STREAM_READ_TIMEOUT = 2000
 SLEEP_INTERVAL = 0.1

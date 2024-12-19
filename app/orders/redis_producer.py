@@ -7,8 +7,8 @@ from datetime import datetime
 
 from dotenv import load_dotenv
 
-from app.redis_client import redis_client
-from app.redis_producer import RedisProducer, signal_handler
+from app.redis_stream.redis_client import redis_client
+from app.redis_stream.redis_producer import RedisProducer, signal_handler
 
 # Load environment variables from the .env file
 load_dotenv()

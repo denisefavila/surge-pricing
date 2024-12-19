@@ -1,11 +1,13 @@
 import logging
-import os
 
-from app.redis_client import redis_client
-from app.redis_persist import StreamSave
+from app.redis_stream.redis_client import redis_client
+from app.redis_stream.redis_persist import StreamSave
 
-ORDER_STREAM = os.getenv("ORDER_REDIS_STREAM", "order_stream")
-CONSUMER_GROUP_NAME = "order_persist_consumer_group"
+DRIVER_POSITION_STREAM = "driver_position_stream"
+DRIVER_COUNT_KEY = "driver_count_by_region"
+
+RESOLUTIONS = [7, 8, 9]
+CONSUMER_GROUP_NAME = "driver_position_persist_consumer_group"
 
 
 logging.basicConfig(
@@ -18,7 +20,7 @@ def main():
     with redis_client() as client:
         saver = StreamSave(
             client,
-            stream_name=ORDER_STREAM,
+            stream_name=DRIVER_POSITION_STREAM,
             consumer_group_name=CONSUMER_GROUP_NAME,
         )
         saver.run()

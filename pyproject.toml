@@ -17,6 +17,7 @@ pandas = "^2.2.3"
 folium = "^0.19.2"
 branca = "^0.8.1"
 cassandra-driver = "^3.29.2"
+kafka-python = "^2.0.2"
 
 
 [build-system]

@@ -3,9 +3,7 @@ import time
 import uuid
 from datetime import datetime
 
-from cassandra.cluster import Cluster
-
-from app.redis_processor import StreamProcessor
+from app.redis_stream.redis_processor import StreamProcessor
 from cassandra_db.cassandra_connection import create_cassandra_connection
 
 STREAM_READ_TIMEOUT = 2000

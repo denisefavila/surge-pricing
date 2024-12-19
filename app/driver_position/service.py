@@ -1,10 +1,5 @@
-from datetime import datetime
-
-import h3
-
 from app.data_aggregator_service import DataAggregator
-from app.driver_position.aggregator_consumer import DRIVER_COUNT_KEY
-from app.driver_position.schemas import DriverPositionsCount
+from app.driver_position.redis_aggregator_consumer import DRIVER_COUNT_KEY
 
 TIME_WINDOW_MINUTES = 5
 

@@ -77,9 +77,7 @@ class DataProvider:
         driver_count_data = driver_position_aggregator.get_driver_count_for_all_cells(
             cell_resolution=cell_resolution
         )
-        return {
-            data.region: data.count for data in driver_count_data.driver_position_counts
-        }
+        return {data.region: data.count for data in driver_count_data.position_counts}
 
     @staticmethod
     def get_order_count_dict(cell_resolution: int = 7) -> Dict[str, int]:
@@ -87,9 +85,7 @@ class DataProvider:
         order_count_data = order_aggregator.get_order_count_for_all_cells(
             cell_resolution
         )
-        return {
-            data.region: data.count for data in order_count_data.driver_position_counts
-        }
+        return {data.region: data.count for data in order_count_data.position_counts}
 
     @staticmethod
     def get_surge_price_dict(cell_resolution: int = 7) -> Dict[str, float]:

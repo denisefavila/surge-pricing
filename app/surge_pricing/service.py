@@ -32,11 +32,11 @@ class SurgePricingCalculator:
         )
 
         order_counts = {
-            data.region: data.count for data in order_counts.driver_position_counts
+            data.region: data.count for data in order_counts.position_counts
         }
 
         driver_counts = {
-            data.region: data.count for data in driver_counts.driver_position_counts
+            data.region: data.count for data in driver_counts.position_counts
         }
 
         surge_prices = {}

@@ -3,7 +3,7 @@ import time
 
 import h3
 
-from app.redis_processor import StreamProcessor
+from app.redis_stream.redis_processor import StreamProcessor
 
 STREAM_READ_TIMEOUT = 2000
 SLEEP_INTERVAL = 0.1

@@ -4,9 +4,7 @@ from datetime import datetime, timedelta
 import h3
 import redis
 
-from app.driver_position.aggregator_consumer import DRIVER_COUNT_KEY
-from app.driver_position.schemas import (DriverPositionsCount,
-                                         DriverPositionsCountResponse)
+from app.schemas import PositionsCount, PositionsCountResponse
 
 # Redis connection configuration
 REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
@@ -57,11 +55,11 @@ class DataAggregator:
         total_count = self._aggregate_counts(time_keys, cell_resolution)
 
         aggregated_data = [
-            DriverPositionsCount(region=region, count=count)
+            PositionsCount(region=region, count=count)
             for region, count in total_count.items()
         ]
 
-        return DriverPositionsCountResponse(driver_position_counts=aggregated_data)
+        return PositionsCountResponse(position_counts=aggregated_data)
 
     def get_count_in_last_minute(self, cell_id: str):
         time_keys = [datetime.utcnow().strftime("%Y-%m-%dT%H:%M")]
@@ -70,4 +68,4 @@ class DataAggregator:
         total_count = self._aggregate_counts(time_keys, cell_resolution=cell_resolution)
 
         count = total_count[cell_id]
-        return DriverPositionsCount(region=cell_id, count=count)
+        return PositionsCount(region=cell_id, count=count)
