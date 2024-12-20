@@ -107,50 +107,6 @@ services:
     networks:
       - surge_pricing_network
 
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.3.2
-    container_name: zookeeper
-    environment:
-      - ZOOKEEPER_CLIENT_PORT=2181
-      - ZOOKEEPER_TICK_TIME=2000
-    ports:
-      - "2181:2181"
-    networks:
-      - surge_pricing_network
-
-  kafka:
-    image: confluentinc/cp-kafka:5.5.1
-    container_name: kafka
-    environment:
-      - KAFKA_LISTENERS=PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
-      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP= PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      - KAFKA_LISTENER_NAME=PLAINTEXT
-      - KAFKA_LISTENER_PORT=9092
-      - KAFKA_LISTENER_INTER_BROKER_PROTOCOL=PLAINTEXT
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
-    ports:
-      - '9092:9092'
-      - '29092:29092'
-    depends_on:
-      - zookeeper
-    networks:
-      - surge_pricing_network
-
-  kafka_producer:
-    build: .
-    container_name: kafka_producer
-    depends_on:
-      - kafka
-    networks:
-      - surge_pricing_network
-    environment:
-      - PYTHONUNBUFFERED=1
-      - PYTHONPATH=/app
-    command: bash -c "/app/start_kafka_producer.sh"
-    volumes:
-      - .:/app
 networks:
   surge_pricing_network:
     driver: bridge
